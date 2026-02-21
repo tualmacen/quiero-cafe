@@ -346,3 +346,522 @@
 </body>
 
 </html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Express - Pago con MercadoPago</title>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c1810 0%, #4a2c17 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 24px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .coffee-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #2c1810;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .menu-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            color: #555;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .dropdown {
+            position: relative;
+            width: 100%;
+        }
+
+        .dropdown-select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: #f8f8f8;
+            font-size: 16px;
+            cursor: pointer;
+            appearance: none;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-select:hover {
+            border-color: #8b4513;
+        }
+
+        .dropdown-select:focus {
+            outline: none;
+            border-color: #8b4513;
+            background: #fff;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .option-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f8f8;
+        }
+
+        .option-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .option-card.selected {
+            border-color: #8b4513;
+            background: #fff5eb;
+        }
+
+        .option-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .option-text {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .price-tag {
+            font-size: 32px;
+            color: #2c1810;
+            text-align: center;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+
+        .price-tag span {
+            font-size: 16px;
+            color: #888;
+            display: block;
+            margin-top: 5px;
+            font-weight: normal;
+        }
+
+        .pay-button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #009ee3 0%, #0077b6 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .pay-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 158, 227, 0.3);
+        }
+
+        .pay-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .mercadopago-badge {
+            text-align: center;
+            font-size: 12px;
+            color: #009ee3;
+            margin-top: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 350px;
+            width: 100%;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .modal h2 {
+            color: #2c1810;
+            margin-bottom: 10px;
+        }
+
+        .modal p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .close-modal {
+            background: #2c1810;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #wallet_container {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #009ee3;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .config-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #856404;
+        }
+
+        .config-box strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="coffee-icon">☕</div>
+            <h1>Café Express</h1>
+            <p class="subtitle">Pedido rápido - Pago seguro</p>
+        </div>
+
+        <!-- INSTRUCCIONES DE CONFIGURACIÓN -->
+        <div class="config-box" id="configBox">
+            <strong>⚠️ Configuración requerida:</strong>
+            Reemplaza <code>TU_PUBLIC_KEY</code> con tu Public Key de MercadoPago y configura tu backend para crear preferencias.
+        </div>
+
+        <div class="menu-section">
+            <p class="section-title">Selecciona tu café</p>
+            <div class="dropdown">
+                <select class="dropdown-select" id="coffeeType" onchange="updatePrice()">
+                    <option value="espresso" data-name="Espresso">Espresso - $2.500</option>
+                    <option value="cortado" data-name="Cortado">Cortado - $3.000</option>
+                    <option value="capuccino" data-name="Capuccino">Capuccino - $3.500</option>
+                    <option value="latte" data-name="Latte">Latte - $3.800</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <p class="section-title">¿Con medialunas?</p>
+            <div class="options-grid">
+                <div class="option-card" onclick="selectOption(this, true)" id="withCroissant">
+                    <div class="option-icon">🥐</div>
+                    <div class="option-text">Con medialunas<br><small>+$1.500</small></div>
+                </div>
+                <div class="option-card selected" onclick="selectOption(this, false)" id="withoutCroissant">
+                    <div class="option-icon">☕</div>
+                    <div class="option-text">Solo café</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="price-tag" id="totalPrice">
+            $2.500
+            <span>Total a pagar</span>
+        </div>
+
+        <!-- Botón de MercadoPago -->
+        <button class="pay-button" id="checkout-btn" onclick="createPreference()">
+            <span>💳</span>
+            Pagar con MercadoPago
+        </button>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Preparando tu pago...</p>
+        </div>
+
+        <!-- Contenedor del botón de MercadoPago -->
+        <div id="wallet_container"></div>
+
+        <p class="mercadopago-badge">🔒 Pagos seguros procesados por MercadoPago</p>
+    </div>
+
+    <!-- Modal de éxito -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">✅</div>
+            <h2>¡Pago exitoso!</h2>
+            <p>Tu café está en preparación.<br>Número de orden: #<span id="orderNumber"></span></p>
+            <button class="close-modal" onclick="resetOrder()">Nuevo pedido</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURACIÓN - REEMPLAZA ESTOS VALORES
+        // ============================================
+        const MP_PUBLIC_KEY = 'TU_PUBLIC_KEY'; // Reemplaza con tu Public Key de MercadoPago
+        const BACKEND_URL = 'https://tu-backend.com'; // URL de tu servidor para crear preferencias
+        
+        let withMedialunas = false;
+        let mp = null;
+        
+        const prices = {
+            espresso: 2500,
+            cortado: 3000,
+            capuccino: 3500,
+            latte: 3800
+        };
+
+        const coffeeNames = {
+            espresso: 'Espresso',
+            cortado: 'Cortado',
+            capuccino: 'Capuccino',
+            latte: 'Latte'
+        };
+
+        // Inicializar MercadoPago
+        if (MP_PUBLIC_KEY !== 'TU_PUBLIC_KEY') {
+            mp = new MercadoPago(MP_PUBLIC_KEY);
+            document.getElementById('configBox').style.display = 'none';
+        }
+
+        function selectOption(element, withCroissant) {
+            withMedialunas = withCroissant;
+            
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            updatePrice();
+            // Limpiar botón anterior si existe
+            document.getElementById('wallet_container').innerHTML = '';
+            document.getElementById('wallet_container').style.display = 'none';
+            document.getElementById('checkout-btn').style.display = 'flex';
+        }
+
+        function updatePrice() {
+            const coffeeType = document.getElementById('coffeeType').value;
+            let total = prices[coffeeType];
+            
+            if (withMedialunas) {
+                total += 1500;
+            }
+            
+            document.getElementById('totalPrice').innerHTML = 
+                `$${total.toLocaleString('es-AR')}<span>Total a pagar</span>`;
+            
+            // Limpiar botón anterior si existe
+            document.getElementById('wallet_container').innerHTML = '';
+            document.getElementById('wallet_container').style.display = 'none';
+            document.getElementById('checkout-btn').style.display = 'flex';
+        }
+
+        async function createPreference() {
+            if (MP_PUBLIC_KEY === 'TU_PUBLIC_KEY') {
+                alert('⚠️ Debes configurar tu Public Key de MercadoPago primero.\n\n1. Crea una cuenta en MercadoPago\n2. Obtén tus credenciales en: https://www.mercadopago.com.ar/developers\n3. Reemplaza TU_PUBLIC_KEY en el código');
+                return;
+            }
+
+            const coffeeType = document.getElementById('coffeeType').value;
+            const coffeeName = coffeeNames[coffeeType];
+            const unitPrice = prices[coffeeType];
+            const total = withMedialunas ? unitPrice + 1500 : unitPrice;
+            
+            const description = withMedialunas ? 
+                `${coffeeName} + Medialunas` : 
+                `${coffeeName} (solo)`;
+
+            // Mostrar loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('checkout-btn').disabled = true;
+
+            try {
+                // Crear preferencia en tu backend
+                const response = await fetch(`${BACKEND_URL}/create_preference`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: description,
+                        price: total,
+                        quantity: 1,
+                        coffee_type: coffeeType,
+                        with_croissant: withMedialunas
+                    })
+                });
+
+                const preference = await response.json();
+
+                if (preference.id) {
+                    // Crear botón de pago de MercadoPago
+                    mp.bricks().create("wallet", "wallet_container", {
+                        initialization: {
+                            preferenceId: preference.id,
+                        },
+                        callbacks: {
+                            onReady: () => {
+                                document.getElementById('loading').style.display = 'none';
+                                document.getElementById('checkout-btn').style.display = 'none';
+                                document.getElementById('wallet_container').style.display = 'block';
+                            },
+                            onSubmit: () => {
+                                // El usuario completó el pago
+                            },
+                            onError: (error) => {
+                                console.error('Error:', error);
+                                alert('Hubo un error al procesar el pago. Intenta nuevamente.');
+                                document.getElementById('loading').style.display = 'none';
+                                document.getElementById('checkout-btn').disabled = false;
+                            }
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al conectar con el servidor. Verifica que tu backend esté configurado.');
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('checkout-btn').disabled = false;
+            }
+        }
+
+        function resetOrder() {
+            document.getElementById('successModal').style.display = 'none';
+            document.getElementById('coffeeType').selectedIndex = 0;
+            selectOption(document.getElementById('withoutCroissant'), false);
+            updatePrice();
+            document.getElementById('wallet_container').innerHTML = '';
+            document.getElementById('wallet_container').style.display = 'none';
+            document.getElementById('checkout-btn').style.display = 'flex';
+        }
+
+        // Verificar parámetros de URL (vuelta de MercadoPago)
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+            
+            if (status === 'approved') {
+                const orderNum = Math.floor(Math.random() * 900) + 100;
+                document.getElementById('orderNumber').textContent = orderNum;
+                document.getElementById('successModal').style.display = 'flex';
+                
+                // Limpiar URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } else if (status === 'failure' || status === 'pending') {
+                alert('El pago no se completó. Puedes intentar nuevamente.');
+            }
+        };
+    </script>
+</body>
+</html>
+
