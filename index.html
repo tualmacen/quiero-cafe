@@ -708,7 +708,7 @@
         // ============================================
         // CONFIGURACIÓN - REEMPLAZA ESTOS VALORES
         // ============================================
-        const MP_PUBLIC_KEY = 'TU_PUBLIC_KEY'; // Reemplaza con tu Public Key de MercadoPago
+        const MP_PUBLIC_KEY = 'APP_USR-2ad92d7a-993a-46db-b1ca-8def3b2e57ae'; // Reemplaza con tu Public Key de MercadoPago
         const BACKEND_URL = 'https://tu-backend.com'; // URL de tu servidor para crear preferencias
         
         let withMedialunas = false;
@@ -729,7 +729,7 @@
         };
 
         // Inicializar MercadoPago
-        if (MP_PUBLIC_KEY !== 'TU_PUBLIC_KEY') {
+        if (MP_PUBLIC_KEY !== 'APP_USR-2ad92d7a-993a-46db-b1ca-8def3b2e57ae') {
             mp = new MercadoPago(MP_PUBLIC_KEY);
             document.getElementById('configBox').style.display = 'none';
         }
@@ -864,5 +864,6 @@
     </script>
 </body>
 </html>
+
 
 
