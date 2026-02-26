@@ -16,186 +16,120 @@
             background: #F5F5DC;
             min-height: 100vh;
             color: #2C1810;
+            padding: 20px;
         }
 
         .container {
             max-width: 480px;
             margin: 0 auto;
-            padding: 20px;
         }
 
-        .header {
+        h1 {
             text-align: center;
-            padding: 30px 0;
-        }
-
-        .header h1 {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 900;
-            color: #2C1810;
+            margin: 30px 0;
         }
 
-        .screen {
-            display: none;
-        }
-
-        .screen.active {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* QR Screen */
-        .qr-box {
-            background: white;
-            border-radius: 20px;
-            padding: 50px 30px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            margin-top: 40px;
-        }
-
-        .qr-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 18px;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: all 0.2s;
-        }
-
-        .btn-coffee {
-            background: #2C1810;
-            color: white;
-        }
-
-        .btn-coffee:hover {
-            background: #4A3728;
-        }
-
-        .btn-mp {
-            background: #009EE3;
-            color: white;
-            font-size: 20px;
-        }
-
-        .btn-mp:hover {
-            background: #0089C9;
-        }
-
-        /* Menu Screen */
         .section {
             background: white;
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 25px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         .section-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: 15px;
-            color: #2C1810;
+            margin-bottom: 20px;
         }
 
-        .size-options {
+        .sizes {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
 
-        .option {
+        .size-btn {
             border: 3px solid #E0E0E0;
             border-radius: 16px;
-            padding: 25px;
+            padding: 30px 20px;
             text-align: center;
             cursor: pointer;
+            background: white;
             transition: all 0.2s;
         }
 
-        .option:hover {
+        .size-btn:hover {
             border-color: #D4A574;
         }
 
-        .option.selected {
+        .size-btn.selected {
             border-color: #2C1810;
             background: #FFF8E1;
         }
 
-        .option-icon {
+        .size-icon {
             font-size: 50px;
             margin-bottom: 10px;
         }
 
-        .option-name {
+        .size-name {
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 5px;
         }
 
-        .option-price {
-            font-size: 24px;
+        .size-price {
+            font-size: 28px;
             font-weight: 800;
             color: #2C1810;
         }
 
-        /* Medialunas */
-        .addon-box {
+        .medialunas-box {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px;
             background: #F5F5DC;
-            border-radius: 12px;
-            margin-top: 10px;
+            padding: 20px;
+            border-radius: 16px;
         }
 
-        .addon-info {
+        .medialunas-info {
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        .addon-icon {
-            font-size: 40px;
+        .medialunas-icon {
+            font-size: 45px;
         }
 
-        .addon-text {
+        .medialunas-text {
             font-weight: 700;
+            font-size: 18px;
         }
 
-        .addon-price {
+        .medialunas-price {
             font-size: 14px;
             color: #666;
         }
 
-        .quantity-control {
+        .quantity {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .qty-btn {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             border: none;
             background: #2C1810;
             color: white;
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
             cursor: pointer;
         }
@@ -204,103 +138,59 @@
             background: #CCC;
         }
 
-        .qty-number {
-            font-size: 24px;
+        .qty-num {
+            font-size: 28px;
             font-weight: 800;
             min-width: 30px;
             text-align: center;
         }
 
-        /* Summary */
-        .summary {
+        .total-box {
             background: #2C1810;
             color: white;
-            border-radius: 16px;
-            padding: 25px;
-            margin-top: 20px;
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        .summary-total {
-            display: flex;
-            justify-content: space-between;
-            font-size: 28px;
-            font-weight: 800;
-            border-top: 2px solid rgba(255,255,255,0.2);
-            padding-top: 15px;
-            margin-top: 15px;
-        }
-
-        /* Payment Screen */
-        .payment-card {
-            background: white;
             border-radius: 20px;
             padding: 30px;
             text-align: center;
-            margin-top: 20px;
         }
 
-        .payment-item {
-            font-size: 24px;
-            font-weight: 700;
+        .total-label {
+            font-size: 16px;
+            opacity: 0.8;
             margin-bottom: 10px;
         }
 
-        .payment-total {
+        .total-amount {
             font-size: 48px;
             font-weight: 900;
-            color: #2C1810;
-            margin-bottom: 30px;
-        }
-
-        .mp-badge {
-            background: #009EE3;
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: 700;
             margin-bottom: 20px;
         }
 
-        /* Success Screen */
-        .success-box {
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .success-icon {
-            width: 100px;
-            height: 100px;
-            background: #4CAF50;
+        .btn-pay {
+            width: 100%;
+            padding: 22px;
+            border: none;
+            border-radius: 16px;
+            background: #009EE3;
             color: white;
-            border-radius: 50%;
+            font-size: 22px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 50px;
-            margin: 0 auto 30px;
+            gap: 10px;
         }
 
-        .code-box {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        .btn-pay:hover:not(:disabled) {
+            background: #0089C9;
+            transform: translateY(-2px);
         }
 
-        .code {
-            font-size: 40px;
-            font-weight: 900;
-            letter-spacing: 5px;
-            color: #2C1810;
-            font-family: monospace;
+        .btn-pay:disabled {
+            background: #666;
+            cursor: not-allowed;
+            opacity: 0.5;
         }
 
         .loading {
@@ -309,12 +199,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255,255,255,0.95);
+            background: rgba(0,0,0,0.8);
             display: none;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             z-index: 1000;
+            color: white;
         }
 
         .loading.active {
@@ -322,10 +213,10 @@
         }
 
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #009EE3;
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top: 5px solid #009EE3;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-bottom: 20px;
@@ -334,265 +225,200 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        .loading-text {
+            font-size: 20px;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>☕ Quiero un Café</h1>
-        </div>
+        <h1>☕ Quiero un Café</h1>
 
-        <!-- Screen 1: QR Scan -->
-        <div id="scan-screen" class="screen active">
-            <div class="qr-box">
-                <div class="qr-icon">📷</div>
-                <h2>Escanea para pedir</h2>
-                <p style="color: #666; margin: 15px 0;">Acerca tu cámara al código QR</p>
-                <button class="btn btn-coffee" onclick="startOrder()">Simular escaneo</button>
-            </div>
-        </div>
-
-        <!-- Screen 2: Menu -->
-        <div id="menu-screen" class="screen">
-            <!-- Coffee Size -->
-            <div class="section">
-                <div class="section-title">Elige tu tamaño</div>
-                <div class="size-options">
-                    <div class="option" onclick="selectSize('chico', 3.00, this)">
-                        <div class="option-icon">🥤</div>
-                        <div class="option-name">Vaso Chico</div>
-                        <div class="option-price">$3.00</div>
-                    </div>
-                    <div class="option" onclick="selectSize('grande', 4.50, this)">
-                        <div class="option-icon">🧋</div>
-                        <div class="option-name">Vaso Grande</div>
-                        <div class="option-price">$4.50</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Medialunas -->
-            <div class="section">
-                <div class="section-title">¿Sumar medialunas?</div>
-                <div class="addon-box">
-                    <div class="addon-info">
-                        <div class="addon-icon">🥐</div>
-                        <div>
-                            <div class="addon-text">Medialunas</div>
-                            <div class="addon-price">+$1.50 c/u</div>
-                        </div>
-                    </div>
-                    <div class="quantity-control">
-                        <button class="qty-btn" onclick="changeMedialunas(-1)" disabled id="btn-minus">−</button>
-                        <div class="qty-number" id="medialunas-qty">0</div>
-                        <button class="qty-btn" onclick="changeMedialunas(1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Summary -->
-            <div class="summary" id="summary-box" style="opacity: 0.5;">
-                <div class="summary-row">
-                    <span id="summary-coffee">Ningún café seleccionado</span>
-                    <span id="summary-coffee-price">$0.00</span>
-                </div>
-                <div class="summary-row" id="summary-medialunas-row" style="display: none;">
-                    <span id="summary-medialunas-text">0 medialunas</span>
-                    <span id="summary-medialunas-price">$0.00</span>
-                </div>
-                <div class="summary-total">
-                    <span>Total</span>
-                    <span id="total-price">$0.00</span>
-                </div>
-                <button class="btn btn-mp" id="pay-btn" onclick="goToPayment()" disabled style="margin-top: 20px; opacity: 0.5;">
-                    Pagar con MercadoPago
+        <div class="section">
+            <div class="section-title">Elige tu café</div>
+            <div class="sizes">
+                <button class="size-btn" onclick="selectSize('chico', 3.00, this)">
+                    <div class="size-icon">🥤</div>
+                    <div class="size-name">Chico</div>
+                    <div class="size-price">$3.00</div>
+                </button>
+                <button class="size-btn" onclick="selectSize('grande', 4.50, this)">
+                    <div class="size-icon">🧋</div>
+                    <div class="size-name">Grande</div>
+                    <div class="size-price">$4.50</div>
                 </button>
             </div>
         </div>
 
-        <!-- Screen 3: Payment -->
-        <div id="payment-screen" class="screen">
-            <div class="payment-card">
-                <div class="payment-item" id="pay-coffee">-</div>
-                <div id="pay-medialunas" style="color: #666; margin-bottom: 20px;"></div>
-                <div class="payment-total" id="pay-total">$0.00</div>
-                
-                <div class="mp-badge">MERCADOPAGO</div>
-                <p style="color: #666; margin-bottom: 20px;">Serás redirigido para pagar de forma segura</p>
-                
-                <button class="btn btn-mp" onclick="processPayment()">
-                    Confirmar Pago
-                </button>
-                <button class="btn btn-coffee" onclick="backToMenu()" style="background: transparent; color: #2C1810; border: 2px solid #2C1810; margin-top: 10px;">
-                    Volver
-                </button>
+        <div class="section">
+            <div class="section-title">¿Sumar medialunas?</div>
+            <div class="medialunas-box">
+                <div class="medialunas-info">
+                    <div class="medialunas-icon">🥐</div>
+                    <div>
+                        <div class="medialunas-text">Medialunas</div>
+                        <div class="medialunas-price">$1.50 c/u</div>
+                    </div>
+                </div>
+                <div class="quantity">
+                    <button class="qty-btn" onclick="changeQty(-1)" disabled id="btn-minus">−</button>
+                    <div class="qty-num" id="qty">0</div>
+                    <button class="qty-btn" onclick="changeQty(1)">+</button>
+                </div>
             </div>
         </div>
 
-        <!-- Screen 4: Success -->
-        <div id="success-screen" class="screen">
-            <div class="success-box">
-                <div class="success-icon">✓</div>
-                <h2 style="font-size: 28px; margin-bottom: 10px;">¡Listo!</h2>
-                <p style="color: #666;">Tu pedido está preparándose</p>
-                
-                <div class="code-box">
-                    <div style="font-size: 14px; color: #999; margin-bottom: 10px;">Código de retiro</div>
-                    <div class="code" id="order-code">----</div>
-                </div>
-                
-                <p style="color: #666; font-size: 14px;">Mostrá este código en la barra</p>
-                
-                <button class="btn btn-coffee" onclick="newOrder()" style="margin-top: 30px;">
-                    Nuevo pedido
-                </button>
-            </div>
+        <div class="total-box">
+            <div class="total-label">Total a pagar</div>
+            <div class="total-amount" id="total">$0.00</div>
+            <button class="btn-pay" id="pay-btn" onclick="pay()" disabled>
+                <span>💳</span> Pagar con MercadoPago
+            </button>
         </div>
     </div>
 
-    <!-- Loading -->
     <div class="loading" id="loading">
         <div class="spinner"></div>
-        <div style="font-weight: 700; color: #2C1810;">Conectando con MercadoPago...</div>
+        <div class="loading-text">Preparando tu pago...</div>
     </div>
 
+    <!-- SDK de MercadoPago -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    
     <script>
+        // CONFIGURACIÓN - Reemplazar con tu Public Key de MercadoPago
+        const MP_PUBLIC_KEY = 'TU_PUBLIC_KEY_AQUI'; // Ej: APP_USR-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        
+        // Inicializar MercadoPago
+        const mp = new MercadoPago(MP_PUBLIC_KEY, {
+            locale: 'es-AR'
+        });
+
         let selectedSize = '';
         let coffeePrice = 0;
         let medialunas = 0;
         const MEDIALUNA_PRICE = 1.50;
 
-        function startOrder() {
-            showScreen('menu-screen');
-        }
-
-        function selectSize(size, price, element) {
-            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-            element.classList.add('selected');
+        function selectSize(size, price, btn) {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
             
             selectedSize = size;
             coffeePrice = price;
             
-            updateSummary();
+            updateTotal();
         }
 
-        function changeMedialunas(delta) {
+        function changeQty(delta) {
             medialunas = Math.max(0, medialunas + delta);
-            document.getElementById('medialunas-qty').textContent = medialunas;
+            document.getElementById('qty').textContent = medialunas;
             document.getElementById('btn-minus').disabled = medialunas === 0;
             
-            updateSummary();
+            updateTotal();
         }
 
-        function updateSummary() {
-            const summaryBox = document.getElementById('summary-box');
+        function updateTotal() {
+            const total = coffeePrice + (medialunas * MEDIALUNA_PRICE);
+            document.getElementById('total').textContent = '$' + total.toFixed(2);
+            
             const payBtn = document.getElementById('pay-btn');
+            payBtn.disabled = !selectedSize;
+        }
+
+        async function pay() {
+            const total = coffeePrice + (medialunas * MEDIALUNA_PRICE);
             
-            if (selectedSize) {
-                summaryBox.style.opacity = '1';
-                payBtn.disabled = false;
-                payBtn.style.opacity = '1';
+            document.getElementById('loading').classList.add('active');
+
+            // Crear preferencia de pago
+            const preference = {
+                items: [
+                    {
+                        title: 'Café ' + selectedSize.charAt(0).toUpperCase() + selectedSize.slice(1),
+                        unit_price: coffeePrice,
+                        quantity: 1,
+                        currency_id: 'ARS'
+                    }
+                ],
+                back_urls: {
+                    success: window.location.href + '?status=success',
+                    failure: window.location.href + '?status=failure',
+                    pending: window.location.href + '?status=pending'
+                },
+                auto_return: 'approved'
+            };
+
+            // Agregar medialunas si hay
+            if (medialunas > 0) {
+                preference.items.push({
+                    title: 'Medialunas x' + medialunas,
+                    unit_price: medialunas * MEDIALUNA_PRICE,
+                    quantity: 1,
+                    currency_id: 'ARS'
+                });
+            }
+
+            try {
+                // Crear checkout
+                mp.checkout({
+                    preference: {
+                        id: await createPreferenceId(preference)
+                    },
+                    autoOpen: true
+                });
                 
-                document.getElementById('summary-coffee').textContent = 'Café ' + selectedSize;
-                document.getElementById('summary-coffee-price').textContent = '$' + coffeePrice.toFixed(2);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al iniciar el pago. Intenta de nuevo.');
+                document.getElementById('loading').classList.remove('active');
             }
-            
-            const medialunasTotal = medialunas * MEDIALUNA_PRICE;
-            const total = coffeePrice + medialunasTotal;
-            
-            if (medialunas > 0) {
-                document.getElementById('summary-medialunas-row').style.display = 'flex';
-                document.getElementById('summary-medialunas-text').textContent = medialunas + ' medialuna' + (medialunas > 1 ? 's' : '');
-                document.getElementById('summary-medialunas-price').textContent = '$' + medialunasTotal.toFixed(2);
-            } else {
-                document.getElementById('summary-medialunas-row').style.display = 'none';
-            }
-            
-            document.getElementById('total-price').textContent = '$' + total.toFixed(2);
         }
 
-        function goToPayment() {
-            if (!selectedSize) return;
-            
-            document.getElementById('pay-coffee').textContent = 'Café ' + selectedSize;
-            
-            const medialunasTotal = medialunas * MEDIALUNA_PRICE;
-            const total = coffeePrice + medialunasTotal;
-            
-            if (medialunas > 0) {
-                document.getElementById('pay-medialunas').textContent = '+ ' + medialunas + ' medialuna' + (medialunas > 1 ? 's' : '') + ' ($' + medialunasTotal.toFixed(2) + ')';
-            } else {
-                document.getElementById('pay-medialunas').textContent = '';
-            }
-            
-            document.getElementById('pay-total').textContent = '$' + total.toFixed(2);
-            
-            showScreen('payment-screen');
-        }
+        // Función para crear la preferencia en tu backend
+        async function createPreferenceId(preferenceData) {
+            // OPCIÓN 1: Con backend propio (recomendado)
+            /*
+            const response = await fetch('https://tubackend.com/crear-preferencia', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(preferenceData)
+            });
+            const data = await response.json();
+            return data.id; // Retorna el ID de la preferencia
+            */
 
-       async function processPayment() {
-    const total = coffeePrice + (medialunas * MEDIALUNA_PRICE);
-    
-    const response = await fetch('TU_BACKEND/crear-preferencia', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            titulo: `Café ${selectedSize}${medialunas > 0 ? ' + ' + medialunas + ' medialunas' : ''}`,
-            precio: total
-        })
-    });
-    
-    const data = await response.json();
-    window.location.href = data.init_point; // Redirige a MercadoPago
-}
+            // OPCIÓN 2: Para pruebas sin backend (no usar en producción)
+            // Necesitas tu ACCESS_TOKEN para esto, no solo PUBLIC_KEY
+            const ACCESS_TOKEN = 'APP_USR-768942024748825-022519-40a00db444986ddea4ecc0de577229ee-166328495'; // Solo para desarrollo
             
-            document.getElementById('loading').classList.remove('active');
-            
-            // Generar código de orden
-            const code = Math.random().toString(36).substring(2, 6).toUpperCase();
-            document.getElementById('order-code').textContent = code;
-            
-            // Guardar orden
-            console.log('Orden:', {
-                code: code,
-                coffee: selectedSize,
-                coffeePrice: coffeePrice,
-                medialunas: medialunas,
-                total: coffeePrice + (medialunas * MEDIALUNA_PRICE),
-                time: new Date().toISOString()
+            const response = await fetch('https://api.mercadopago.com/checkout/preferences', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + APP_USR-768942024748825-022519-40a00db444986ddea4ecc0de577229ee-166328495,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(preferenceData)
             });
             
-            showScreen('success-screen');
+            const data = await response.json();
+            return data.id;
         }
 
-        function backToMenu() {
-            showScreen('menu-screen');
-        }
-
-        function newOrder() {
-            selectedSize = '';
-            coffeePrice = 0;
-            medialunas = 0;
-            
-            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-            document.getElementById('medialunas-qty').textContent = '0';
-            document.getElementById('btn-minus').disabled = true;
-            document.getElementById('summary-box').style.opacity = '0.5';
-            document.getElementById('pay-btn').disabled = true;
-            document.getElementById('pay-btn').style.opacity = '0.5';
-            document.getElementById('summary-medialunas-row').style.display = 'none';
-            document.getElementById('summary-coffee').textContent = 'Ningún café seleccionado';
-            document.getElementById('summary-coffee-price').textContent = '$0.00';
-            document.getElementById('total-price').textContent = '$0.00';
-            
-            showScreen('scan-screen');
-        }
-
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
-            window.scrollTo(0, 0);
+        // Verificar si volvimos de un pago
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        
+        if (status === 'success') {
+            alert('¡Pago exitoso! Tu café se está preparando.');
+            window.location.href = window.location.pathname; // Limpiar URL
+        } else if (status === 'failure') {
+            alert('El pago fue rechazado. Intenta de nuevo.');
+            window.location.href = window.location.pathname;
+        } else if (status === 'pending') {
+            alert('Pago pendiente. Te avisaremos cuando se acredite.');
+            window.location.href = window.location.pathname;
         }
     </script>
 </body>
