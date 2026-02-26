@@ -531,30 +531,21 @@
             showScreen('payment-screen');
         }
 
-        async function processPayment() {
-            document.getElementById('loading').classList.add('active');
-            
-            // Simular procesamiento
-            await new Promise(r => setTimeout(r, 2000));
-            
-            // INTEGRACIÓN REAL MERCADOPAGO:
-            /*
-            const total = coffeePrice + (medialunas * MEDIALUNA_PRICE);
-            
-            const response = await fetch('/api/mercadopago/create-preference', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    items: [
-                        { title: 'Café ' + selectedSize, unit_price: coffeePrice, quantity: 1 },
-                        ...(medialunas > 0 ? [{ title: 'Medialunas x' + medialunas, unit_price: medialunas * MEDIALUNA_PRICE, quantity: 1 }] : [])
-                    ]
-                })
-            });
-            
-            const data = await response.json();
-            window.location.href = data.init_point;
-            */
+       async function processPayment() {
+    const total = coffeePrice + (medialunas * MEDIALUNA_PRICE);
+    
+    const response = await fetch('TU_BACKEND/crear-preferencia', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            titulo: `Café ${selectedSize}${medialunas > 0 ? ' + ' + medialunas + ' medialunas' : ''}`,
+            precio: total
+        })
+    });
+    
+    const data = await response.json();
+    window.location.href = data.init_point; // Redirige a MercadoPago
+}
             
             document.getElementById('loading').classList.remove('active');
             
@@ -606,3 +597,4 @@
     </script>
 </body>
 </html>
+
